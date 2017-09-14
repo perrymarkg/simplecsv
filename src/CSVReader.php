@@ -17,13 +17,6 @@ class CSVReader {
         $this->hasHeaders = $hasHeaders;
         is_array($options) ? $this->options = array_merge($this->options, $options) : ''; 
 
-        try{
-            $this->validateFile();
-        }
-        catch( \Exception $e){
-            die( 'Error:' . $e->getMessage() );
-        }
-
         return $this;
     }
 
@@ -34,6 +27,14 @@ class CSVReader {
     }
 
     public function read(){
+        
+        try{
+            $this->validateFile();
+        }
+        catch( \Exception $e){
+            die( 'Error:' . $e->getMessage() );
+        }
+
         $handle = fopen( $this->file, 'r' );
         
         $ctr = 0;
