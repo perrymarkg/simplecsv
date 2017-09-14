@@ -1,0 +1,23 @@
+{
+    "name": "prymag/SimpleCSV",
+    "description": "CSV Reader/parser",
+    "type": "library",
+    "require": {
+        "php": ">=5.5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.3"
+    },
+    "authors": [
+        {
+            "name": "Perry Mark Guinjicna II",
+            "email": "pmgd2nd@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "prymag\\SimpleCSV\\" : "src/"
+        }
+    }
+}
