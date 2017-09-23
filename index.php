@@ -8,5 +8,5 @@ $arr = $v->read()->getData();
 //var_dump($arr);
 
 foreach($arr as $a){
-    echo $a['Year'] . "\n";
+    echo $a['State'] . "<br/>";
 }
