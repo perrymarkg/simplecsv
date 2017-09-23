@@ -2,6 +2,7 @@
 
 require_once 'vendor/autoload.php';
 use prymag\SimpleCSV\CSVReader;
+
 $v = new CSVReader( 'Sample.csv', true );
 
 $arr = $v->read()->getData();
