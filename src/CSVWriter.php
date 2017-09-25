@@ -2,27 +2,52 @@
 
 namespace prymag\SimpleCSV;
 
+/**
+ * CSVWriter for writing to a CSV file or creating CSV file for download from array
+ */
 class CSVWriter {
 
-    private $headers = array();
-    private $fp;
+    private $headers;
+    private $fp; // File obj
     private $data;
-    private $filename = 'csvfile';
+    private $filename = 'csvfile'; // default filename for download
 
-    function __construct( $data ){
+    /**
+     * Class constructor
+     *
+     * @param array $data
+     */
+    function __construct( $data = array() ){
         $this->data = $data;
     }
 
-    function setHeaders( $headers ){
+    /**
+     * Set the headers for the CSV file
+     *
+     * @param array $headers
+     * @return void
+     */
+    function setHeaders( $headers = array()){
         $this->headers = $headers;
         return $this;
     }
 
+    /**
+     * Set the CSV filename for download
+     *
+     * @param string $filename
+     * @return void
+     */
     function setFileName( $filename ){
         $this->filename = $filename;
         return $this;
     }
 
+    /**
+     * Assigns the correct row headers for the CSV file
+     *
+     * @return void
+     */
     private function assignHeaders(){
         if( !isset($this->fp) )
             throw new \Exception('Error setting header');
@@ -40,6 +65,11 @@ class CSVWriter {
             
     }
 
+    /**
+     * Download the CSV file
+     *
+     * @return void
+     */
     function download(){
 
         $this->fp = fopen('php://output', 'w');
@@ -54,6 +84,12 @@ class CSVWriter {
         fclose($this->fp);
     }
 
+    /**
+     * Append the data to the CSV file
+     *
+     * @param [type] $filename
+     * @return void
+     */
     function write($filename){
         
         $this->fp = fopen($filename, 'a+');
