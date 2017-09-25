@@ -2,6 +2,9 @@
 
 namespace prymag\SimpleCSV;
 
+/**
+ * CSVReader for reading a csv file and parsing it to an array
+ */
 class CSVReader {
 
     private $file;
@@ -9,9 +12,21 @@ class CSVReader {
     private $data;
     private $total;
 
+    /**
+     * Options for the class
+     *  delimiter = The delimiter used on the csv file
+     * @var array
+     */
     private $options = array('delimiter' => ',');
-
-    public function __construct( $file = false, $hasHeaders = false, $options = false){
+    
+    /**
+     * Class constructor
+     *
+     * @param boolean $file = filename
+     * @param boolean $hasHeaders = true if you want to use the headers as array key for the result
+     * @param array $options = pass additional options to be imrpoved
+     */
+    public function __construct( $file = false, $hasHeaders = false, $options = array()){
 
         $this->file = $file;
         $this->hasHeaders = $hasHeaders;
@@ -20,12 +35,22 @@ class CSVReader {
         return $this;
     }
 
+    /**
+     * Validate if CSV file exists
+     *
+     * @return void
+     */
     public function validateFile(){
         if( !file_exists($this->file) ){
             throw new \Exception('CSV File does not exists!');
         }
     }
 
+    /**
+     * Read contents of the CSV File
+     *
+     * @return void
+     */
     public function read(){
         
         try{
@@ -47,8 +72,8 @@ class CSVReader {
                     $item[ $headers[$k] ] = $v;
                 }
                 $this->data[] = $item;
+                $ctr++;
             }
-            $ctr++;
         }
         fclose($handle);
 
@@ -56,10 +81,20 @@ class CSVReader {
         return $this;
     }
 
+    /**
+     * Get the CSV data
+     *
+     * @return void
+     */
     public function getData(){
         return $this->data;
     }
 
+    /**
+     * Get total data processed
+     *
+     * @return void
+     */
     public function getTotal(){
         return $total;
     }
