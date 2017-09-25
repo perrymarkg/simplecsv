@@ -54,10 +54,13 @@ class CSVWriter {
         fclose($this->fp);
     }
 
-    function write($filename, $file, $type){
+    function write($filename){
         
-        $this->fp = fopen($filename, 'w');
+        $this->fp = fopen($filename, 'a+');
         
+        foreach($this->data as $d){
+            fputcsv($this->fp, $d);
+        }
         fclose($this->fp);
 
     }
