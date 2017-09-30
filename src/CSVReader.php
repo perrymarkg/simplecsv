@@ -57,7 +57,7 @@ class CSVReader {
             $this->validateFile();
         }
         catch( \Exception $e){
-            die( 'Error:' . $e->getMessage() );
+            return 'File does not exist!';
         }
 
         $handle = fopen( $this->file, 'r' );
