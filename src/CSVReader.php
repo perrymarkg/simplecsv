@@ -68,12 +68,12 @@ class CSVReader {
                 $headers = $row;
             }
             else{
-                foreach( $row as $k => $v ){
+                foreach( $row as $k => $v ){           
                     $item[ $headers[$k] ] = $v;
                 }
                 $this->data[] = $item;
-                $ctr++;
             }
+            $ctr++;
         }
         fclose($handle);
 
@@ -84,7 +84,6 @@ class CSVReader {
     /**
      * Get the CSV data
      *
-     * @return void
      */
     public function getData(){
         return $this->data;
@@ -96,7 +95,7 @@ class CSVReader {
      * @return void
      */
     public function getTotal(){
-        return $total;
+        return $this->hasHeaders ? $this->total-1 : $this->total;
     }
 
 }
