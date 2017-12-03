@@ -4,20 +4,31 @@ use \prymag\SimpleCSV\CSVReader;
 
 class CSVReaderTest extends \PHPUnit\Framework\TestCase {
 
+    private $reader;
+    private $data;
+    private $total;
+
+    public function setUp(){
+        $this->reader = new CSVReader('Sample.csv', true);
+        $this->data = $this->reader->read()->getData();
+        $this->total = $this->reader->getTotal();
+    }
+
     public function testReaderParsesCSV(){
 
-        $reader = new CSVReader('Sample.csv');
-        $data = $reader->read()->getData();
-        $this->assertTrue(is_array($data));
+        $this->assertTrue(is_array($this->data));
 
     }
-    
-    /**
-     * @expectedException     Exception
-     */
-    public function testReaderThrowsException(){
-        $reader = new CSVReader('invalid file.csv');
-        $data = $reader->validateFile();
+
+    public function testCSVDataNotEmpty(){
+        
+        $this->assertTrue( !empty($this->data) );
     }
+    
+    public function testCheckCount(){
+        $this->assertEquals( 9, $this->total);
+    }
+
+    
     
 }
